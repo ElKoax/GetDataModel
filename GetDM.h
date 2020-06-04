@@ -1,4 +1,4 @@
-  int GDM;
+int GDM;
 
 typedef DWORD(__cdecl* gdm2)();
 gdm2 getdatamodel2 = (gdm2)(ASLR(0xE4A530));
@@ -39,37 +39,12 @@ int FindFirstClass(int Instance, const char* Name)
 }
 
 
-int exe(DWORD rL, std::string src, std::string chunkname)
-{
-	lua_State* L = lua_open();
-	int result = luaL_loadbuffer(L, src.c_str(), src.size(), chunkname.c_str());
-	if (result)
-	{
-		printf("err: (%s)\n", lua_tostring(L, -1));
-		lua_close(L);
-		return 1;
-	}
-	if (luaD_precall(L, L->top - 1, 0) == 0)
-	{
-		HookedVirtualMachine(L, rL, 1);
-	}
-	else
-	{
-		printf("OOOPSIE! an error has occured in execution! \n");
-		lua_close(L);
-		return 1;
-	}
-
-	lua_close(L);
-	return 0;
-}
-
 
 void getdatamodelaaa()
 {
 	GDM = GetDatamodel();
 	ScriptContext = FindFirstClass(GDM, "ScriptContext");
-	r_L = *(DWORD*)(ScriptContext + 56 * 0 + 164) - (ScriptContext + 56 * 0 + 164);
+	r_L = *(DWORD*)(ScriptContext + 56 * 0 + 164) - (ScriptContext + 56 * 0 + 164); // if ur going to use this for AXON, change "r_L" to m_rL
 	*(DWORD*)(*(DWORD*)(r_L + 112) + 24) = 6;
 	printf("Passed GetDataModel, Enjoy Exploiting! \n");
 }
