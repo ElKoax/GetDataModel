@@ -9,7 +9,7 @@ getdatamodel r_getdatamodel = (getdatamodel)(ASLR(0xE4A680));
 
 int GetDatamodel()
 {
-	DWORD DMPad[2]{};
+	DWORD DMPad[2];
 	r_getdatamodel(getdatamodel2(), (DWORD)DMPad);
 	DWORD DM = DMPad[0];
 	return DM + 0x44;
