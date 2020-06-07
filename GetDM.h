@@ -9,7 +9,6 @@ getdatamodel r_getdatamodel = (getdatamodel)(ASLR(0xE4A680));
 
 int GetDatamodel()
 {
-	volatile DWORD StackPad[16]{};
 	static DWORD DMPad[16]{};
 	r_getdatamodel(getdatamodel2(), (DWORD)DMPad);
 	DWORD DM = DMPad[0];
